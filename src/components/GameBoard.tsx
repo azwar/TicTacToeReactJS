@@ -5,6 +5,7 @@ import ScoreBoard from "./ScoreBoard";
 import { ScoreBoardProps } from "../types";
 import { checkDraw, checkWinner } from "../services/GameLogic";
 import { DialogModalEndGame } from "./DialogModalEndGame";
+import ScoreBoardSmall from "./ScoreBoardSmall";
 
 export type TicTacToeArr = string[][];
 const DEFAULT_BOARD_SIZE = 3;
@@ -106,12 +107,12 @@ function TicTacToe() {
   };
 
   return (
-    <div className="flex justify-center bg-gradient-to-b from-cyan-500 to-blue-500 h-screen h-max">
-      <div className="flex flex-row w-2/3 w-max">
-        <div className="p-5 w-1/4 min-w-44">
+    <div className="flex justify-center bg-gradient-to-b from-cyan-500 to-blue-500 md:h-screen h-full">
+      <div className="flex flex-row w-2/3 w-max md:max-w-2xl">
+        <div id="scoreLeft" className="p-5 w-1/4 min-w-44 hidden md:block">
           <ScoreBoard {...playerX} />
         </div>
-        <div className="flex flex-auto flex-col items-center mt-5">
+        <div id="game" className="flex flex-auto flex-col items-center mt-5">
           <div className="w-fullp-5">
             <h1 className="font-sans text-3xl font-bold mb-6">Tic Tac Toe</h1>
             <div className="flex w-full justify-center items-center ">
@@ -142,6 +143,10 @@ function TicTacToe() {
               </select>
             </div>
           </div>
+          <div className="flex flex-col w-full sm:hidden">
+          <ScoreBoardSmall {...playerX} />
+          <ScoreBoardSmall {...playerO} />
+        </div>
           <div className="bg-white mt-4 z-10">
             <div className="flex flex-col">
               {arrTicTacToe.map((row, iRow) => (
@@ -150,7 +155,8 @@ function TicTacToe() {
                     <Item
                       value={cel}
                       onClick={() => makeMove(iRow, iCell)}
-                    ></Item>
+                      boardSize={arrTicTacToe.length}
+                    />
                   ))}
                 </div>
               ))}
@@ -167,7 +173,7 @@ function TicTacToe() {
             <span className="mt-20">by Azwar Akbar</span>
           </div>
         </div>
-        <div className="p-5 w-1/4 min-w-44">
+        <div id="scoreRight" className="p-5 w-1/4 min-w-44 hidden sm:block">
           <ScoreBoard {...playerO} />
         </div>
       </div>

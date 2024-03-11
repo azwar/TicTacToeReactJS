@@ -1,5 +1,6 @@
 export interface ItemProps {
     value: string;
+    boardSize?: number;
     onClick: () => void;
 }
 
